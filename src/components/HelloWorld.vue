@@ -13,10 +13,15 @@ const mode = import.meta.env.MODE
   <img :src="image" alt="manually imported" />
 
   <h1>Directly referenced static asset</h1>
+  <img src="src/shared/assets/image.svg" alt="manually imported" />
+
+  <h1>Directly referenced multibrand static asset</h1>
   <img src="&/assets/image.svg" alt="direct-reference"/>
 </template>
 
 <style scoped>
+  body { background-color: white; }
+
   img {
     width: 200px;
     height: 200px;
