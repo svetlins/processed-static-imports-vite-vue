@@ -1,5 +1,7 @@
 Small reproduction of a problem with processed imports not working correctly with `@vitejs/plugin-vue` handling of static assets (https://github.com/vitejs/vite-plugin-vue/blob/main/packages/plugin-vue/README.md#asset-url-handling)
 
+Not completely relevant to the reproduced is the multibrand / skin mechanism - env variable `VITE_SKIN` controls where assets are drawn from, and if a skin is not set or a given asset is not found, then it's looked up in `src/shared/assets`. There's an `assets/image.svg` available for a `skin1` and `skin2`, as well as in `shared`.
+
 ## Recommended IDE Setup
 
 - [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
