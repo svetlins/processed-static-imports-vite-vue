@@ -1,38 +1,31 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-
-import fs from "fs"
-import path from "path"
+import { fileURLToPath, URL } from 'url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
-  resolve: {
-    alias: [
-      {
-        find: "&",
-        replacement: '&',
-        customResolver(source) {
-          if (
-            fs.existsSync(
-              path.resolve(
-                __dirname,
-                source.replace('&', `src/${process.env.VITE_SKIN}`)
-              )
-            )
-          ) {
-            return path.resolve(
-              __dirname,
-              source.replace('&', `src/${process.env.VITE_SKIN}`)
-            )
-        } else {
-          return path.resolve(
-            __dirname,
-            source.replace('&', 'src/shared')
-          )
+  plugins: [
+    vue(),
+    {
+      name: 'branding-resolver',
+      async resolveId(source, importer, options) {
+        if (source.startsWith('&')) {
+          const brandedPath = source.replace('&', `@/${process.env.VITE_SKIN}`)
+          const defaultPath = source.replace('&', `@/shared`)
+
+          const brandedModule = await this.resolve(brandedPath, importer, options)
+
+          if (brandedModule) {
+            return brandedModule
+          }
+
+          return await this.resolve(defaultPath, importer, options)
         }
-        },
-      }
-    ]
-  }
+        return null
+      },
+    },
+  ],
+  resolve: {
+    alias: [{ find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) }],
+  },
 })

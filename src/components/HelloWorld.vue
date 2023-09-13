@@ -2,13 +2,18 @@
 
 import image from '&/assets/image.svg'
 
+const mode = import.meta.env.MODE
+
 </script>
 
 <template>
+  <h3> {{ mode }}  </h3>
+
   <h1>Manually imported static asset</h1>
-  <img :src="image" />
+  <img :src="image" alt="manually imported" />
+
   <h1>Directly referenced static asset</h1>
-  <img src="&/assets/image.svg" width="200" height="200" alt="plugin-vue"/>
+  <img src="&/assets/image.svg" alt="direct-reference"/>
 </template>
 
 <style scoped>
