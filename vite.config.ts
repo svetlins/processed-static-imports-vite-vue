@@ -11,19 +11,26 @@ export default defineConfig({
     alias: [
       {
         find: "&",
-        replacement(foo, _bar, larodi) {
+        replacement: '&',
+        customResolver(source) {
           if (
             fs.existsSync(
               path.resolve(
                 __dirname,
-                larodi.replace(foo, `src/${process.env.VITE_SKIN}`)
+                source.replace('&', `src/${process.env.VITE_SKIN}`)
               )
             )
           ) {
-            return path.resolve(__dirname, `src/${process.env.VITE_SKIN}`);
-          } else {
-            return path.resolve(__dirname, `src/shared`);
-          }
+            return path.resolve(
+              __dirname,
+              source.replace('&', `src/${process.env.VITE_SKIN}`)
+            )
+        } else {
+          return path.resolve(
+            __dirname,
+            source.replace('&', 'src/shared')
+          )
+        }
         },
       }
     ]
