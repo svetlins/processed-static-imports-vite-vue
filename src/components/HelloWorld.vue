@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import image from '&/assets/image.svg'
+import image from '@test/assets/image.svg'
 
 const mode = import.meta.env.MODE
 
@@ -16,7 +16,7 @@ const mode = import.meta.env.MODE
   <img src="src/shared/assets/image.svg" alt="manually imported" />
 
   <h1>Directly referenced multibrand static asset</h1>
-  <img src="&/assets/image.svg" alt="direct-reference"/>
+  <img src="@test/assets/image.svg" alt="direct-reference"/>
 </template>
 
 <style scoped>
