@@ -11,9 +11,9 @@ export default defineConfig({
     {
       name: 'branding-resolver',
       async resolveId(source, importer, options) {
-        if (source.startsWith('&')) {
-          const brandedPath = source.replace('&', `@/${process.env.VITE_SKIN}`)
-          const defaultPath = source.replace('&', `@/shared`)
+        if (source.startsWith('@test')) {
+          const brandedPath = source.replace('@test', `@/${process.env.VITE_SKIN}`)
+          const defaultPath = source.replace('@test', `@/shared`)
 
           const brandedModule = await this.resolve(brandedPath, importer, options)
 
