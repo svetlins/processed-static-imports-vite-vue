@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'url'
+import fs from 'fs'
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +17,7 @@ export default defineConfig({
 
           const brandedModule = await this.resolve(brandedPath, importer, options)
 
-          if (brandedModule) {
+          if (brandedModule && fs.existsSync(brandedModule.id)) {
             return brandedModule
           }
 
